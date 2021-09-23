@@ -1,0 +1,17 @@
+﻿body{
+
+}
+.topNav{
+    background-color: dimgrey;
+    height: 50px;
+    border: 30px;
+}
+
+.search-container{
+    float:right;
+    padding-block: 25px;
+}
+.dropdown{
+    float:left;
+
+}
