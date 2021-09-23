@@ -26,13 +26,6 @@ function operationDVD(operation,dvdid){
 	$("#searchResults").toggle()
 	
     $("#operationDVD").show()
-=======
-function operationDVD(operation){
-    //$("#operationTitle").textcontent(operation)
-    $("#container").hide()
-    $("#operationDVD").hide()
->>>>>>> 6a24c975fef5c870a8d1b909f7bef959e6cae298
-}
 
 
 function loadDVD(){
