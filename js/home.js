@@ -13,7 +13,7 @@ function formCancelled(){
 
 //takes in string either create or update
 function operationDVD(operation){
-    $("#operationTitle").textcontent(operation)
+    //$("#operationTitle").textcontent(operation)
     $("#container").hide()
     $("#operationDVD").hide()
 }
@@ -93,9 +93,9 @@ function showEditForm(contactId) {
 
 
 
-function addContact() {
-    $('#addButton').click(function (event) {
-    	var haveValidationErrors = checkAndDisplayValidationErrors($('#addForm').find('input'));
+function addDVD() {
+    $('#addDVD').click(function (event) {
+    	var haveValidationErrors = checkAndDisplayValidationErrors($('#editForm').find('input'));
     	//checking data
         if(haveValidationErrors) {
             return false;
@@ -104,13 +104,13 @@ function addContact() {
 
         $.ajax({
            type: 'POST',
-           url: 'http://contactlist.us-east-1.elasticbeanstalk.com/contact',
+           url: 'http://dvd-library.us-east-1.elasticbeanstalk.com/dvd',
            data: JSON.stringify({
-                firstName: $('#addFirstName').val(),
-                lastName: $('#addLastName').val(),
-                company: $('#addCompany').val(),
-                phone: $('#addPhone').val(),
-                email: $('#addEmail').val()
+                title: $('#editDvdTitle').val(),
+                releaseYear: $('#editYear').val(),
+                director: $('#editDirector').val(),
+                rating: $('.dropdown-menu').val(),
+                notes: $('#editNotes').val()
            }),
            headers: {
                'Accept': 'application/json',
@@ -119,12 +119,12 @@ function addContact() {
            'dataType': 'json',
            success: function() {
                $('#errorMessages').empty();
-               $('#addFirstName').val('');
-               $('#addLastName').val('');
-               $('#addCompany').val('');
-               $('#addphone').val('');
-               $('#addEmail').val('');
-               loadContacts();
+               $('#editDvdTitle').val('');
+               $('#editYear').val('');
+               $('#editDirector').val('');
+               $('.dropdown-menu').val('');
+               $('#editNotes').val('');
+               loadDVD();
            },
            error: function () {
                $('#errorMessages')
