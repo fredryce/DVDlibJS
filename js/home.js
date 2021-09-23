@@ -17,11 +17,17 @@ function formCancelled(){
 function operationDVD(operation,dvdid){
 	// alert(operation);
 	// alert(dvdid);
-	
-	// if operation == 0 {
-	// }
-	// else{
-	// }
+	if(operation == 0){
+        //create dvd
+        var str_value = 'Create: '
+        str_value+= dvdid
+        $("#operationTitle").text(str_value)
+	}
+	else{
+        //edit dvd
+        $("#operationTitle").text('EDIT: ' + dvdid)
+
+	}
 
     // $("#operationTitle").append(operation);
 	$("#searchResults").toggle()
