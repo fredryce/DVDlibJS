@@ -1,6 +1,7 @@
 $(document).ready(function() {
 
 	loadDVD();
+    addDVD();
 })
 
 
@@ -94,13 +95,14 @@ function showEditForm(contactId) {
 
 
 function addDVD() {
-    $('#addDVD').click(function (event) {
+    $('#savechange').click(function (event) {
     	var haveValidationErrors = checkAndDisplayValidationErrors($('#editForm').find('input'));
     	//checking data
         if(haveValidationErrors) {
             return false;
         }
 
+        
 
         $.ajax({
            type: 'POST',
@@ -134,6 +136,8 @@ function addDVD() {
            }
         })
     });
+
+
 }
 
 
