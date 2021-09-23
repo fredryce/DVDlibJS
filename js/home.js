@@ -12,7 +12,7 @@ function formCancelled(){
 }
 
 //takes in string either create or update
-<<<<<<< HEAD
+
 function operationDVD(operation,dvdid){
 	// alert(operation);
 	// alert(dvdid);
@@ -26,7 +26,7 @@ function operationDVD(operation,dvdid){
 	$("#searchResults").toggle()
 	
     $("#operationDVD").show()
-
+}
 
 function loadDVD(){
 
