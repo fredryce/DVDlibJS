@@ -1,14 +1,24 @@
 $(document).ready(function() {
 
-	loadContacts();
-	addContact();
-	updateContact();
+	loadDVD();
 })
 
 
 
+function formCancelled(){
+    $("#operationDVD").hide()
 
-function loadContacts(){
+}
+
+//takes in string either create or update
+function operationDVD(operation){
+    $("#operationTitle").textcontent(operation)
+    //hide main container
+    $("#operationDVD").hide()
+}
+
+
+function loadDVD(){
 
 	clearContactTable();
 
