@@ -13,12 +13,21 @@ function formCancelled(){
 }
 
 //takes in string either create or update
-function operationDVD(operation){
-    //$("#operationTitle").textcontent(operation)
-    $("#container").hide()
-    $("#operationDVD").hide()
-}
 
+function operationDVD(operation,dvdid){
+	// alert(operation);
+	// alert(dvdid);
+	
+	// if operation == 0 {
+	// }
+	// else{
+	// }
+
+    // $("#operationTitle").append(operation);
+	$("#searchResults").toggle()
+	
+    $("#operationDVD").show()
+}
 
 function loadDVD(){
 
@@ -56,7 +65,7 @@ function showDVD(DVDArray){
                     row += '<td>' + releaseYear + '</td>';
 					row += '<td>'+ director + '</td>';
 					row += '<td>'+ rating+'</td>';
-                    row += '<td><button type="button" class="btn btn-outline-info btn-lg">Edit</button></td>'
+                    row += '<td><button type="button" class="btn btn-info" onclick="operationDVD('+dvdId+','+1+')">Edit</button></td>';
                     row += '<td><button type="button" class="btn btn-outline-danger btn-lg">Delete</button></td>';
                     row += '</tr>';
                 
