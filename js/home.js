@@ -14,8 +14,8 @@ function loadContacts(){
 
 	$.ajax({
 	    type: 'GET',
-	    url: 'http://contactlist.us-east-1.elasticbeanstalk.com/contacts',
-	    success: showContact, //reference not calling function
+	    url: 'http://dvd-library.us-east-1.elasticbeanstalk.com/dvds',
+	    success: showDVD, //reference not calling function
 	    error: function() {
 		    	$('#errorMessages')
 		        .append($('<li>')
@@ -26,26 +26,33 @@ function loadContacts(){
 }
 
 
+
+
+
 function hideEditForm(){
 	$("#editFormDiv").toggle();
 	$('#contactTable').toggle();
 
 }
 
-function showContact(contactArray){
-
+function showDVD(DVDArray){
+	
+	// $("#searchResults").hide();
 	var contentRows = $('#contentRows');
 
-	 $.each(contactArray, function(index, contact){
-                var name = contact.firstName + ' ' + contact.lastName;
-                var company = contact.company;
-                var contactId = contact.contactId;
-                
+	 $.each(DVDArray, function(index, DVD){
+				var dvdId = DVD.id
+                var title = DVD.title;
+                var releaseYear = DVD.releaseYear;
+                var director = DVD.director;
+				var rating = DVD.rating; 
                 var row = '<tr>';
-                    row += '<td>' + name + '</td>';
-                    row += '<td>' + company + '</td>';
-                    row += '<td><button type="button" onClick="showEditForm(' + contactId + ')" class="btn btn-outline-info btn-lg">Edit</button></td>'
-                    row += '<td><button type="button" onClick="deleteContact(' + contactId + ')" class="btn btn-outline-danger btn-lg">Delete</button></td>';
+                    row += '<td>' + title + '</td>';
+                    row += '<td>' + releaseYear + '</td>';
+					row += '<td>'+ director + '</td>';
+					row += '<td>'+ rating+'</td>';
+                    row += '<td><button type="button" class="btn btn-outline-info btn-lg">Edit</button></td>'
+                    row += '<td><button type="button" class="btn btn-outline-danger btn-lg">Delete</button></td>';
                     row += '</tr>';
                 
                 contentRows.append(row);

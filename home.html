@@ -14,7 +14,30 @@
 
   </head>
   <body>
-
+    <div class="container">
+      <h1>Search Results</h1>
+      <hr>
+      <ul class="list-group" id="errorMessages"></ul>
+	  <div class = "container" id = "searchResults">
+		<div class = "row>
+			 <div id="dvdTable">
+				<h2>DVDS</h2> 
+				<table id="dvdTable" class="table table-hover">
+				  <thead>
+					<tr>
+					  <th width="30%">Title </th>
+					  <th width="15%">Release Date</th>
+					  <th width="15%">Director</th>
+					  <th width="5%">Rating</th>
+					  <th width "5%"></th>
+					  <th width "5%"></th>
+					</tr>
+				  </thead>
+				  <!-- we will add data rows dynamically to the tbody -->
+				  <tbody id="contentRows"></tbody>
+				</table>
+		</div>
+	</div>
     <div class="container">
       <h1>Contact Application</h1>
       <hr>
