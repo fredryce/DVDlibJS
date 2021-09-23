@@ -7,13 +7,14 @@ $(document).ready(function() {
 
 function formCancelled(){
     $("#operationDVD").hide()
+    $("#container").show()
 
 }
 
 //takes in string either create or update
 function operationDVD(operation){
     $("#operationTitle").textcontent(operation)
-    //hide main container
+    $("#container").hide()
     $("#operationDVD").hide()
 }
 
@@ -37,13 +38,6 @@ function loadDVD(){
 
 
 
-
-
-function hideEditForm(){
-	$("#editFormDiv").toggle();
-	$('#contactTable').toggle();
-
-}
 
 function showDVD(DVDArray){
 	
