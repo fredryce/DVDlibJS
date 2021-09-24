@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	loadDVD();
-    addDVD();
+    //addDVD();
     //updateDVD();
 })
 
@@ -41,8 +41,7 @@ function operationDVD(dvdId, operation,dvdTitle){
         
     }
     else{
-		alert("adding dvd");
-        // addDVD();
+        addDVD();
     }
 
     $("#operationTitle").text(dvdTitle)
@@ -107,18 +106,19 @@ $("#addDVD").on("click",function(){
 
 $("#savechange").on("click",function(){
 	alert("added to database");
-	addDVD();
-	hideEditForm();
+	 addDVD();
+	 formCancelled();
+	
 });
 
 
 function addDVD() {
     $('#savechange').click(function (event) {
-    	// var haveValidationErrors = checkAndDisplayValidationErrors($('#editForm').find('input'));
-    	// checking data
-        // if(haveValidationErrors) {
-            // return false;
-        // }
+    	var haveValidationErrors = checkAndDisplayValidationErrors($('#editForm').find('input'));
+    	//checking data
+        if(haveValidationErrors) {
+            return false;
+        }
 
         
 
