@@ -1,7 +1,8 @@
 $(document).ready(function() {
 
 	loadDVD();
-    addDVD();
+    //addDVD();
+    //updateDVD();
 })
 
 
@@ -17,6 +18,7 @@ function operationDVD(dvdId, operation,dvdTitle){
 
     if(operation==1){
         //when operation is edit
+        updateDVD();
         $('#errorMessages').empty();
         $.ajax({
             type: 'GET',
@@ -27,6 +29,7 @@ function operationDVD(dvdId, operation,dvdTitle){
                 $('#editDirector').val(data.director);
                 //$('.dropdown-menu').val(data.rating);
                 $('#editNotes').val(data.notes);
+                $('#editDVDId').val(dvdId);
                 
             },
             error: function() {
@@ -36,9 +39,10 @@ function operationDVD(dvdId, operation,dvdTitle){
                 .text('Error calling web service. Please try again later.')); 
             }
         })
+        
     }
     else{
-
+        addDVD();
     }
 
     $("#operationTitle").text(dvdTitle)
@@ -86,7 +90,7 @@ function showDVD(DVDArray){
 					row += '<td>'+ director + '</td>';
 					row += '<td>'+ rating+'</td>';
                     row += "<td><button type='button' class='btn btn-info' onclick='operationDVD("+ dvdId + "," + 1 + ",\"" + heading + "\");'>Edit</button></td>";
-                    row += "<td><button type='button' class='btn btn-outline-danger btn-lg' onClick='deleteContact(" + dvdId + ")'>Delete</button></td>";
+                    row += "<td><button type='button' class='btn btn-outline-danger btn-lg' onClick='deleteDVD(" + dvdId + ")'>Delete</button></td>";
                     row += '</tr>';
                 
                 contentRows.append(row);
@@ -128,7 +132,7 @@ function addDVD() {
                $('#editDvdTitle').val('');
                $('#editYear').val('');
                $('#editDirector').val('');
-               $('.dropdown-menu').val('');
+               //$('.dropdown-menu').val('');
                $('#editNotes').val('');
                loadDVD();
            },
@@ -151,7 +155,7 @@ function clearContactTable() {
     $('#contentRows').empty();
 }
 
-function deleteContact(contactId) {
+function deleteDVD(contactId) {
     $.ajax({
         type: 'DELETE',
         url: 'http://dvd-library.us-east-1.elasticbeanstalk.com/dvd/' + contactId,
@@ -162,8 +166,10 @@ function deleteContact(contactId) {
 }
 
 
-function updateContact() {
-    $('#updateButton').click(function(event) {
+function updateDVD() {
+    $('#savechange').click(function(event) {
+        alert("im updating....");
+        alert($('#editDVDId').val());
     	var haveValidationErrors = checkAndDisplayValidationErrors($('#editForm').find('input'));
         
         if(haveValidationErrors) {
@@ -173,14 +179,14 @@ function updateContact() {
 
         $.ajax({
             type: 'PUT',
-            url: 'http://contactlist.us-east-1.elasticbeanstalk.com/contact/' + $('#editContactId').val(),
+            url: 'http://dvd-library.us-east-1.elasticbeanstalk.com/dvd/' + $('#editDVDId').val(),
             data: JSON.stringify({
-                contactId: $('#editContactId').val(),
-                firstName: $('#editFirstName').val(),
-                lastName: $('#editLastName').val(),
-                company: $('#editCompany').val(),
-                phone: $('#editPhone').val(),
-                email: $('#editEmail').val()
+                dvdId: $('#editDVDId').val(),
+                title: $('#editDvdTitle').val(),
+                releaseYear: $('#editYear').val(),
+                director: $('#editDirector').val(),
+                //rating: $('.dropdown-menu').val(),
+                notes: $('#editNotes').val()
             }),
             headers: {
                 'Accept': 'application/json',
