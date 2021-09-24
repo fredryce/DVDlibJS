@@ -6,32 +6,43 @@ $(document).ready(function() {
 
 
 
-function formCancelled(){
-    $("#operationDVD").hide()
-    $("#container").show()
+function hideEditForm(){
+    $("#operationDVD").toggle();
+    $('#searchResults').toggle();
 
 }
-
 //takes in string either create or update
 
-function operationDVD(operation,dvdid){
-	// alert(operation);
-	// alert(dvdid);
-	if(operation == 0){
-        //create dvd
-        var str_value = 'Create: '
-        str_value+= dvdid
-        $("#operationTitle").text(str_value)
-	}
-	else{
-        //edit dvd
-        $("#operationTitle").text('EDIT: ' + dvdid)
+function operationDVD(dvdId, operation,dvdTitle){
 
-	}
+    if(operation==1){
+        //when operation is edit
+        $('#errorMessages').empty();
+        $.ajax({
+            type: 'GET',
+            url: 'http://dvd-library.us-east-1.elasticbeanstalk.com/dvd/' + dvdId,
+            success: function(data, status) {
+                $('#editDvdTitle').val(data.title);
+                $('#editYear').val(data.releaseYear);
+                $('#editDirector').val(data.director);
+                //$('.dropdown-menu').val(data.rating);
+                $('#editNotes').val(data.notes);
+                
+            },
+            error: function() {
+                $('#errorMessages')
+                .append($('<li>')
+                .attr({class: 'list-group-item list-group-item-danger'})
+                .text('Error calling web service. Please try again later.')); 
+            }
+        })
+    }
+    else{
 
-    // $("#operationTitle").append(operation);
+    }
+
+    $("#operationTitle").text(dvdTitle)
 	$("#searchResults").toggle()
-	
     $("#operationDVD").show()
 }
 
@@ -65,14 +76,17 @@ function showDVD(DVDArray){
                 var title = DVD.title;
                 var releaseYear = DVD.releaseYear;
                 var director = DVD.director;
-				var rating = DVD.rating; 
+				var rating = DVD.rating;
+
+                var heading = "Edit: " + title
+
                 var row = '<tr>';
                     row += '<td>' + title + '</td>';
                     row += '<td>' + releaseYear + '</td>';
 					row += '<td>'+ director + '</td>';
 					row += '<td>'+ rating+'</td>';
-                    row += '<td><button type="button" class="btn btn-info" onclick="operationDVD('+dvdId+','+1+')">Edit</button></td>';
-                    row += '<td><button type="button" class="btn btn-outline-danger btn-lg">Delete</button></td>';
+                    row += "<td><button type='button' class='btn btn-info' onclick='operationDVD("+ dvdId + "," + 1 + ",\"" + heading + "\");'>Edit</button></td>";
+                    row += "<td><button type='button' class='btn btn-outline-danger btn-lg' onClick='deleteContact(" + dvdId + ")'>Delete</button></td>";
                     row += '</tr>';
                 
                 contentRows.append(row);
@@ -80,32 +94,7 @@ function showDVD(DVDArray){
 }
 
 
-function showEditForm(contactId) {
-    $('#errorMessages').empty();
-    
-    $.ajax({
-        type: 'GET',
-        url: 'http://contactlist.us-east-1.elasticbeanstalk.com/contact/' + contactId,
-        success: function(data, status) {
-            $('#editFirstName').val(data.firstName);
-            $('#editLastName').val(data.lastName);
-            $('#editCompany').val(data.company);
-            $('#editPhone').val(data.phone);
-            $('#editEmail').val(data.email);
-            $('#editContactId').val(data.contactId);
-            
-        },
-        error: function() {
-            $('#errorMessages')
-            .append($('<li>')
-            .attr({class: 'list-group-item list-group-item-danger'})
-            .text('Error calling web service. Please try again later.')); 
-        }
-    })
-    
-    $('#contactTable').hide();
-    $('#editFormDiv').show();
-}
+
 
 
 
@@ -165,9 +154,9 @@ function clearContactTable() {
 function deleteContact(contactId) {
     $.ajax({
         type: 'DELETE',
-        url: 'http://contactlist.us-east-1.elasticbeanstalk.com/contact/' + contactId,
+        url: 'http://dvd-library.us-east-1.elasticbeanstalk.com/dvd/' + contactId,
         success: function() {
-            loadContacts();
+            loadDVD();
         }
     });
 }
