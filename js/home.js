@@ -1,6 +1,7 @@
 $(document).ready(function() {
 	loadDVD();
-    //addDVD();
+
+    // addDVD();
     //updateDVD();
 })
 
@@ -17,7 +18,7 @@ function operationDVD(dvdId, operation,dvdTitle){
 
     if(operation==1){
         //when operation is edit
-        updateDVD();
+        // updateDVD();
         $('#errorMessages').empty();
         $.ajax({
             type: 'GET',
@@ -38,15 +39,29 @@ function operationDVD(dvdId, operation,dvdTitle){
                 .text('Error calling web service. Please try again later.')); 
             }
         })
+		
+		// $("#savechange").on("click",function(){
+			// alert("edit");
+			updateDVD();
+
+		// });
         
     }
-    else{
-        addDVD();
-    }
+	//operation is adding dvd
+    else if (operation == 0){
+		
+		// $("#savechange").on("click",function(){
+			alert("added to database");
+			addDVD();
 
-    $("#operationTitle").text(dvdTitle)
-	$("#searchResults").toggle()
-    $("#operationDVD").show()
+		// });
+		
+		// alert("adding dvd");
+        // addDVD();
+    }
+	hideEditForm();
+	loadDVD();
+
 }
 
 function loadDVD(){
@@ -99,17 +114,11 @@ function showDVD(DVDArray){
 
 
 $("#addDVD").on("click",function(){
-	operationDVD(0,null);
-
+	operationDVD(null,0,null);
 });
 
 
-$("#savechange").on("click",function(){
-	alert("added to database");
-	 addDVD();
-	 formCancelled();
-	
-});
+
 
 
 function addDVD() {
@@ -179,7 +188,7 @@ function deleteDVD(contactId) {
 function updateDVD() {
     $('#savechange').click(function(event) {
         alert("im updating....");
-        alert($('#editDVDId').val());
+        // alert($('#editDVDId').val());
     	var haveValidationErrors = checkAndDisplayValidationErrors($('#editForm').find('input'));
         
         if(haveValidationErrors) {
