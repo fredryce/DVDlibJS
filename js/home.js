@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
 	loadDVD();
     addDVD();
 })
@@ -95,7 +94,18 @@ function showDVD(DVDArray){
 
 
 
+$("#addDVD").on("click",function(){
+	operationDVD(0,null);
 
+});
+
+
+$("#savechange").on("click",function(){
+	alert("added to database");
+	 addDVD();
+	 formCancelled();
+	
+});
 
 
 function addDVD() {
